@@ -66,11 +66,11 @@ class GameSelector(commands.Cog):
     @commands.command("remove-game")
     async def remove_game(self, ctx, *, game: str) -> None:
         if game in self.available_games:
-            self.available_games.remove(game)
+            self.available_games.remove(game)q
             await ctx.send(f"Removed {game} from the library")
             return
         await ctx.send(f"{game} isn't even in the library, dummy")
     
     @commands.command("help-brandon")
     async def help_brandon(self, ctx):
-        await ctx.send(f"There is no helping {ctx.message.server.get_member(393153618217402379).mention}")
+        await ctx.send(f"There is no helping {self.bot.fetch_user(393153618217402379).mention}")
