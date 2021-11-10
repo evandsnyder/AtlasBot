@@ -14,6 +14,7 @@ class GameSelector(commands.Cog):
         self.bot.help_command.cog = self
         self.preload_games()
         self.available_games.sort()
+        self.brandon = None
     
     def preload_games(self) -> None:
         self.available_games += [
@@ -73,4 +74,6 @@ class GameSelector(commands.Cog):
     
     @commands.command("help-brandon")
     async def help_brandon(self, ctx):
-        await ctx.send(f"There is no helping {self.bot.fetch_user(393153618217402379).mention}")
+        if self.brandon is None:
+            self.brandon = await self.bot.fetch_user(393153618217402379)
+        await ctx.send(f"There is no helping {self.brandon.mention}")
