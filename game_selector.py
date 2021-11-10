@@ -1,6 +1,7 @@
 from discord.embeds import Embed
 from discord.ext import commands
 from discord import Member
+from discord.utils import get
 import random
 
 class GameSelector(commands.Cog):
@@ -33,6 +34,7 @@ class GameSelector(commands.Cog):
     async def add_game(self, ctx, *, game: str):
         # Try to validate the spelling of the game????
         # probably non-trivial
+        # Maybe try a regex. Definitely validate that it isn't a link...
         if game in self.available_games:
             await ctx.send(f"{game} is already in games!")
             return
@@ -60,3 +62,15 @@ class GameSelector(commands.Cog):
         embed.add_field(name="All Games", value="\n".join(games), inline=False)
 
         await ctx.send(embed=embed)
+
+    @commands.command("remove-game")
+    async def remove_game(self, ctx, *, game: str) -> None:
+        if game in self.available_games:
+            self.available_games.remove(game)
+            await ctx.send(f"Removed {game} from the library")
+            return
+        await ctx.send(f"{game} isn't even in the library, dummy")
+    
+    @commands.command("help-brandon")
+    async def help_brandon(self, ctx):
+        await ctx.send(f"There is no helping {ctx.message.server.get_member(393153618217402379).mention}")
