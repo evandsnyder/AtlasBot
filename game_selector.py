@@ -66,7 +66,7 @@ class GameSelector(commands.Cog):
     @commands.command("remove-game")
     async def remove_game(self, ctx, *, game: str) -> None:
         if game in self.available_games:
-            self.available_games.remove(game)q
+            self.available_games.remove(game)
             await ctx.send(f"Removed {game} from the library")
             return
         await ctx.send(f"{game} isn't even in the library, dummy")
